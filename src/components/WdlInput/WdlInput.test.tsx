@@ -97,7 +97,7 @@ describe('WdlInput', () => {
     });
   });
 
-  test('renders text input for wdl Array', () => {
+  test('renders items for wdl Array with remove and add button', () => {
     const inputStream = CharStreams.fromString('Array[Int]');
     const lexer = new WdlV1_1Lexer(inputStream);
     const tokenStream = new CommonTokenStream(lexer);
@@ -109,13 +109,21 @@ describe('WdlInput', () => {
       <WdlInput
         wdlType={wdlType}
         structDefinitions={{}}
-        value={[]}
+        value={[1, 2, 3]}
         onChange={handleChange}
       />
     );
 
-    expect(element.queryAllByRole('button').length).toBe(1);
-    expect(element.getByRole('button').textContent).toBe('add');
+    expect(element.queryAllByRole('textbox').length).toBe(3);
+    expect((element.queryAllByRole('textbox')[0] as HTMLInputElement).value).toBe('1');
+    expect((element.queryAllByRole('textbox')[1] as HTMLInputElement).value).toBe('2');
+    expect((element.queryAllByRole('textbox')[2] as HTMLInputElement).value).toBe('3');
+
+    expect(element.queryAllByRole('button').length).toBe(4);
+    expect(element.queryAllByRole('button')[0].textContent).toBe('remove');
+    expect(element.queryAllByRole('button')[1].textContent).toBe('remove');
+    expect(element.queryAllByRole('button')[2].textContent).toBe('remove');
+    expect(element.queryAllByRole('button')[3].textContent).toBe('addd');
   });
 
   test('renders text input for wdl Map', () => {
