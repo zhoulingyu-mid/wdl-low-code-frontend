@@ -35,6 +35,40 @@ describe('WdlInput', () => {
     });
   });
 
+
+  ([
+    true, false
+  ] as const).map((boolValue) => {
+    test('renders Buttons for wdl Boolean', () => {
+      const inputStream = CharStreams.fromString('Boolean');
+      const lexer = new WdlV1_1Lexer(inputStream);
+      const tokenStream = new CommonTokenStream(lexer);
+      const parser = new WdlV1_1Parser(tokenStream);
+      const wdlType = parser.wdl_type()
+      const handleChange = jest.fn();
+
+      const element = render(
+        <WdlInput
+          wdlType={wdlType}
+          structDefinitions={{}}
+          value={boolValue}
+          onChange={handleChange}
+        />
+      );
+
+      expect(element.queryAllByRole('button').length).toBe(2);
+      expect(element.queryAllByRole('button')[0].textContent).toBe('true');
+      expect(element.queryAllByRole('button')[1].textContent).toBe('false');
+
+      expect(
+        (element.queryAllByRole('button')[0] as HTMLButtonElement).disabled
+      ).toBe(boolValue === true);
+      expect(
+        (element.queryAllByRole('button')[1] as HTMLButtonElement).disabled
+      ).toBe(boolValue === false);
+    });
+  });
+
   ([
     ['String?', 'a string'],
     ['Int?', 1],

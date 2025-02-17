@@ -92,7 +92,7 @@ const WdlInput: React.FC<WdlInputProps> = ({ wdlType, structDefinitions, value, 
       <div>
         <Button
           size='sm'
-          active
+          disabled={value === true}
           onClick={() => {
             onChange(true);
           }}
@@ -101,6 +101,7 @@ const WdlInput: React.FC<WdlInputProps> = ({ wdlType, structDefinitions, value, 
         </Button>
         <Button
           size='sm'
+          disabled={value === false}
           onClick={() => {
             onChange(false);
           }}
