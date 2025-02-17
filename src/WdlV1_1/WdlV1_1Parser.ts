@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 
 // Generated from WdlV1_1Parser.g4 by ANTLR 4.13.2
@@ -17,7 +18,6 @@ import WdlV1_1ParserListener from "./WdlV1_1ParserListener.js";
 import WdlV1_1ParserVisitor from "./WdlV1_1ParserVisitor.js";
 
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
-// eslint-disable-next-line no-unused-vars
 type int = number;
 
 export default class WdlV1_1Parser extends Parser {
